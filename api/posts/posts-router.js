@@ -81,7 +81,22 @@ router.put('/:id', (req, res) => {
                     return Posts.update(id, req.body)
                 }
             })
+            .then((data) => {
+                if (data) {
+                    return Posts.findById(id)
+                }
+            })
+            .then((updatedPost) => {
+                res.status(200).json(updatedPost)
+            })
+            .catch ((err => {
+                console.log(err)
+                res.status(500).json({
+                    message: 'The post information could not be modified'
+                })
+            }))
     }
+    
 })
 
 // [DELETE] /api/posts/:id - Removes the post with the specified id and returns the **deleted post object**
