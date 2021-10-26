@@ -63,7 +63,16 @@ router.post('/', (req, res) => {
 });
 
 // [PUT] /api/posts/:id - Updates the post with the specified id using data from the request body and **returns the modified document**, not the original
+router.put('/:id', (req, res) => {
+    const { title, contents } = req.body
+    if (!title || !contents) {
+        res.status(400).json({
+            message: 'Please provide title and contents for the post'
+        })
+    } else {
 
+    }
+})
 
 // [DELETE] /api/posts/:id - Removes the post with the specified id and returns the **deleted post object**
 
