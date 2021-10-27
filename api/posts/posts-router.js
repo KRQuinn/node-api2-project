@@ -102,14 +102,15 @@ router.put('/:id', (req, res) => {
 
 // [DELETE] /api/posts/:id - Removes the post with the specified id and returns the **deleted post object**
 router.delete('/:id', async (req, res) => {
+    const { id } = req.params
     try {
-      const post = await Posts.findById(req.params.id)
+      const post = await Posts.findById(id)
       if (!post) {
         res.status(404).json({
           message: 'The post with the specified ID does not exist',
         })
       } else {
-        await Posts.remove(req.params.id)
+        await Posts.remove(id)
         res.json(post)
       }
     } catch (err) {
